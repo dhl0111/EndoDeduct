@@ -29,6 +29,6 @@ However, I do not intend to remove the existing results. Instead, I plan to move
 The Appendix will also provide comprehensive comparisons of the estimated (N), (Y), (N^), and (Y^) across models, using evaluation metrics such as MAE and mean squared relative error (MSRE).
 
 Moreover, table 6 in current version (main_revised_v3.tex) illustrates the relative error of the estimated frequency and severity components of the pure premium by deductible level for only case 4. 
-We need to include this framework when comparing MAE, MSRE of S with various deductible levels. This needs to be included in the manuscript together.
+We need to include this framework when comparing MAE, MSRE of S with various deductible levels across all the four cases. These need to be included in the manuscript together.
 
 Incorporating these remaining works above the new manuscript, R code need to be generated too.
