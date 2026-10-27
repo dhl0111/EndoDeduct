@@ -1,0 +1,29 @@
+\begin{table}[!h]
+\renewcommand{\tabcolsep}{0.8mm}
+\renewcommand{\arraystretch}{1}
+\footnotesize
+\centering
+{\color{blue}
+\begin{tabular}[h]{ccccccc}
+\toprule
+\multirow{2}{*}{Frequency} & \multicolumn{2}{c}{Censored} & \multicolumn{4}{c}{Truncated}\\
+\cmidrule(l{3pt}r{3pt}){2-3} \cmidrule(l{3pt}r{3pt}){4-7}
+ & FEM1 & FDM1 & FEM1 & FEM2 & FDM1 & FDM2\\
+\midrule
+MAE & 0.8642 & 0.7250 & 0.7134 & 0.7291 & 0.6237 & 0.6275 \\
+\hhline{=======}
+\end{tabular}
+\\
+\vspace{0.3cm}
+\begin{tabular}[h]{ccccccccc}
+\toprule
+\multirow{2}{*}{Severity} & \multicolumn{4}{c}{Censored} & \multicolumn{4}{c}{Truncated}\\
+\cmidrule(l{3pt}r{3pt}){2-5} \cmidrule(l{3pt}r{3pt}){6-9}
+ & SEM1 & SEM2 & SDM1 & SDM2 & SEM1 & SEM3 & SDM1 & SDM3\\
+\midrule
+MAE & 5643.5 & 5651.4 & 5521.3 & 5517.9 & 6142.5 & 6164.4 & 6130.5 & 6087.7 \\
+\hhline{=========}
+\end{tabular}
+}
+\caption{MAE of the frequency and severity models in Case 6}\label{tab:maecase6}
+\end{table}

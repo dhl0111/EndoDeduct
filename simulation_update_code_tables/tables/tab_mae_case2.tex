@@ -1,0 +1,31 @@
+\begin{table}[!h]
+\renewcommand{\tabcolsep}{0.8mm}
+\renewcommand{\arraystretch}{1}
+\footnotesize
+\centering
+{\color{blue}
+\begin{tabular}[h]{ccccccc}
+\toprule
+\multirow{2}{*}{Frequency} & \multicolumn{2}{c}{Censored} & \multicolumn{4}{c}{Truncated}\\
+\cmidrule(l{3pt}r{3pt}){2-3} \cmidrule(l{3pt}r{3pt}){4-7}
+ & FEM1 & FDM1 & FEM1 & FEM2 & FDM1 & FDM2\\
+\midrule
+MAE & 0.8659 & 0.7705 & 0.5916 & 0.6084 & 0.5682 & 0.5680 \\
+MAE$_{\text{prem}}$ & 0.3770 & 0.0255 & 0.2048 & 0.1884 & 0.0176 & 0.0197 \\
+\hhline{=======}
+\end{tabular}
+\\
+\vspace{0.3cm}
+\begin{tabular}[h]{ccccccccc}
+\toprule
+\multirow{2}{*}{Severity} & \multicolumn{4}{c}{Censored} & \multicolumn{4}{c}{Truncated}\\
+\cmidrule(l{3pt}r{3pt}){2-5} \cmidrule(l{3pt}r{3pt}){6-9}
+ & SEM1 & SEM2 & SDM1 & SDM2 & SEM1 & SEM3 & SDM1 & SDM3\\
+\midrule
+MAE & 3300.7 & 3301.6 & 3300.5 & 3301.5 & 3909.8 & 3910.6 & 3908.6 & 3910.0 \\
+MAE$_{\text{prem}}$ & 101.5 & 103.7 & 115.5 & 119.1 & 123.3 & 151.1 & 134.6 & 173.1 \\
+\hhline{=========}
+\end{tabular}
+}
+\caption{MAE of the frequency and severity models in Case 2}\label{tab:maecase2}
+\end{table}
