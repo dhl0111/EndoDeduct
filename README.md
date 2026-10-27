@@ -8,9 +8,9 @@ endogenous_deductible_pipeline.R file inside code folder gives the results in se
 
 Following works are remaining : 
 
-1. Change of notation (N, Y, N^*, Y^*)
+1. Change of notation (N, Y, N^{*}, Y^{*})
 
- N^*, Y^* are chosen to define the frequency and severity of ground-up loss and N, Y are selected to describe the number and amount payment by an insurer. 
+ N^{*}, Y^{*} are chosen to define the frequency and severity of ground-up loss and N, Y are selected to describe the number and amount payment by an insurer. 
  However, some literature seems to utilize N, Y for the ground-up loss so change of notation needs to be implemented in main_revised_v3.tex.
 
  Then, aggregate insured loss (S) can be expressed as summation of Y^*. We aim to assess the performance of modeling with respect to S. 
