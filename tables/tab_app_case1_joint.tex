@@ -1,0 +1,62 @@
+\begin{table}[!ht]
+\footnotesize
+\centering
+{\color{blue}
+\resizebox{\textwidth}{!}{%
+    \begin{minipage}{0.65\textwidth}
+        \centering
+        \begin{tabular}{lcccccc}
+        \toprule
+        & \multicolumn{2}{c}{SDM1} & \multicolumn{2}{c}{SDM2} & \multicolumn{2}{c}{SDM3} \\
+        \cmidrule(lr){2-3} \cmidrule(lr){4-5} \cmidrule(lr){6-7}
+        & Mean & RMSE & Mean & RMSE & Mean & RMSE \\
+        & (s.e.) & (Bias) & (s.e.) & (Bias) & (s.e.) & (Bias) \\
+        \midrule
+        \multirow{6}{*}{$\beta_Y$} & 8.4838 & 0.0875 & 8.4772 & 0.1032 & 8.4990 & 0.1339 \\
+         & (0.0119) & (-0.0162) & (0.0140) & (-0.0228) & (0.0186) & (-0.0010) \\
+        \cmidrule{2-7}
+         & 0.2013 & 0.0208 & 0.2016 & 0.0228 & 0.1990 & 0.0346 \\
+         & (0.0029) & (0.0013) & (0.0031) & (0.0016) & (0.0048) & (-0.0010) \\
+        \cmidrule{2-7}
+         & 0.5138 & 0.0399 & 0.5132 & 0.0431 & 0.5119 & 0.0537 \\
+         & (0.0052) & (0.0138) & (0.0057) & (0.0132) & (0.0073) & (0.0119) \\
+        \midrule
+        \multirow{2}{*}{$\alpha$} & 2.9924 & 0.1936 & 2.9813 & 0.2084 & 3.0144 & 0.2541 \\
+         & (0.0268) & (-0.0076) & (0.0288) & (-0.0187) & (0.0352) & (0.0144) \\
+        \midrule
+        \multirow{2}{*}{$\rho_Y$} & -0.0037 & 0.0165 & -0.0066 & 0.0252 & -0.0007 & 0.0516 \\
+         & (0.0022) & (-0.0037) & (0.0034) & (-0.0066) & (0.0072) & (-0.0007) \\
+        \hhline{=======}
+        \end{tabular}
+    \end{minipage}
+    \hspace{0.01\textwidth}
+    \begin{minipage}{0.5\textwidth}
+        \centering
+        \begin{tabular}{lcccc}
+        \toprule
+        & \multicolumn{2}{c}{FDM1} & \multicolumn{2}{c}{FDM2} \\
+        \cmidrule(lr){2-3} \cmidrule(lr){4-5}
+        & Mean & RMSE & Mean & RMSE \\
+        & (s.e.) & (Bias) & (s.e.) & (Bias) \\
+        \midrule
+        \multirow{6}{*}{$\beta_N$} & -0.5063 & 0.0317 & -0.5140 & 0.0534 \\
+         & (0.0043) & (-0.0063) & (0.0071) & (-0.0140) \\
+        \cmidrule{2-5}
+         & 0.5009 & 0.0199 & 0.5030 & 0.0274 \\
+         & (0.0028) & (0.0009) & (0.0038) & (0.0030) \\
+        \cmidrule{2-5}
+         & 0.2060 & 0.0447 & 0.2092 & 0.0510 \\
+         & (0.0061) & (0.0060) & (0.0070) & (0.0092) \\
+        \midrule
+        \multirow{2}{*}{$r$} & 1.0121 & 0.0680 & 1.0131 & 0.1078 \\
+         & (0.0093) & (0.0121) & (0.0148) & (0.0131) \\
+        \midrule
+        \multirow{2}{*}{$\rho_N$} & 0.0007 & 0.0176 & -0.0034 & 0.0497 \\
+         & (0.0024) & (0.0007) & (0.0069) & (-0.0034) \\
+        \hhline{=====}
+        \end{tabular}
+    \end{minipage}
+}
+}
+\caption{Simulation result of SDM and FDM in Case 1 (discrete deductible)}\label{tab:AppSimEndCase1}
+\end{table}
