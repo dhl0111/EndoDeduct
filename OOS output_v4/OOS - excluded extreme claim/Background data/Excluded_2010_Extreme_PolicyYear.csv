@@ -1,0 +1,2 @@
+"PolicyNum","Year","TypeCity","TypeCounty","TypeMisc","TypeSchool","TypeTown","TypeVillage","Coverage","Premium","Deduct","Freq","Claim","discDed","dedratio","CoverageLimit_Dollars","CoverageBelowOrEqualDeductible","S_raw","S_limited","n_ground","n_paid_unlimited","n_paid","Exclusion_reason"
+138300,2010,0,0,0,1,0,0,61.172589,14681,5000,1,12922217.84,4,81.7359552985407,61172589,FALSE,12917217.84,12917217.84,1,1,1,"Largest 2010 observed aggregate coverage-limited payment (post hoc)"

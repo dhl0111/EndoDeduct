@@ -1,0 +1,2 @@
+"Training_years","Test_year","Train_policy_years","Test_policy_years","Test_claim_records","Excluded_policy_years","Excluded_PolicyNum","Full_2010_policy_years","Complete_case_test_policy_years","Test_zero_limited_payment_policy_years","Test_zero_coverage_above_deductible","Coverage_conversion_to_dollars","Modeling_coverage_interpretation","Copulas_reselected_on_2010","Models_refitted_on_2010"
+"2006,2007,2008,2009",2010,4152,1037,805,1,"138300",1038,1037,696,1,1e+06,"Per-occurrence ground-up limit (assumed)",FALSE,FALSE
