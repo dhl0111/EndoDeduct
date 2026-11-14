@@ -2,6 +2,7 @@
 
 **Last updated:** November 14, 2026  
 **Status:** Major revisions completed; OOS validation and final manuscript sections pending.
+The files inside Manuscript_v4 folder contain the current version of this project. Relevant R code and its output for the Simulation (Section 3) and Empirical analysis (Section 4) part are uploaded in Simulation_updated_v4, Empirical analysis_v4, OOS output_v4 folder.
 
 ## 1. Summary of Revisions
 
