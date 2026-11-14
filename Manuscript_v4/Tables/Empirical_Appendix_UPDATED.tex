@@ -1,0 +1,207 @@
+\section{Deductible's distribution and estimation results for modeling}
+\label{app:C}
+
+
+\begin{table}[h!]
+\centering
+\resizebox{\linewidth}{!}{
+\begin{tabular}{lrr@{\hspace{1cm}}lrr}
+\toprule
+\multicolumn{3}{c}{Continuous deductible} & \multicolumn{3}{c}{Discrete deductible} \\
+\cmidrule(lr){1-3}
+\cmidrule(lr){4-6}
+Parameter & Estimate & s.e. & Parameter & Estimate & s.e. \\
+\midrule
+Intercept & 5.858 & 0.118 & 1|2 & 1.283 & 0.120 \\
+TypeCity & -2.296 & 0.076 & 2|3 & 2.320 & 0.124 \\
+TypeCounty & -2.928 & 0.097 & 3|4 & 3.146 & 0.128 \\
+TypeSchool & -2.089 & 0.069 & 4|5 & 4.451 & 0.138 \\
+TypeTown & 0.582 & 0.074 & 5|6 & 5.117 & 0.146 \\
+TypeVillage & -1.067 & 0.071 & 6|7 & 5.447 & 0.151 \\
+$\sigma$ & 0.846 & 0.094 & 7|8 & 7.190 & 0.216 \\
+$\alpha_1$ & 1.701 & 0.320 & 8|9 & 8.036 & 0.286 \\
+$\alpha_2$ & 1.218 & 0.198 & 9|10 & 8.345 & 0.321 \\
+ &  &  & TypeCity & 1.339 & 0.146 \\
+ &  &  & TypeCounty & 1.828 & 0.183 \\
+ &  &  & TypeSchool & 0.852 & 0.136 \\
+ &  &  & TypeTown & -0.181 & 0.149 \\
+ &  &  & TypeVillage & 0.699 & 0.128 \\
+ &  &  & $\log(\mathrm{Coverage})$ & -0.967 & 0.032 \\
+\bottomrule
+\end{tabular}
+}
+\caption{Regression estimates and stage-wise standard errors of deductible models.}
+\label{tab:Deduct}
+\end{table}
+
+
+\begin{figure}[h!]
+    \centering
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{dr.png}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{contDedQQ.pdf}
+    \end{minipage}
+    \caption{Histogram and QQ-plots of the continuous deductible}
+    \label{fig:contD}
+\end{figure}
+
+\pagebreak
+\clearpage
+\section{LGPIF dataset in empirical analysis}
+\label{app:D}
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{llrr}
+\toprule
+Variable & Description & Mean & SD \\
+\midrule
+Deduct & Amount of deductible in dollars & 3,321.050 & 8,105.336 \\
+Dedratio & Deductible divided by coverage (coverage in million dollars) & 1,982.787 & 41,194.264 \\
+Freq & Number of ground-up claims per policy-year & 0.589 & 1.537 \\
+Claim & Ground-up amount of individual claims (USD) & 19,514.69 & 154,221.25 \\
+Entity type &  &  &  \\
+City & Indicator for City & 0.144 &  \\
+County & Indicator for County & 0.059 &  \\
+School & Indicator for School & 0.292 &  \\
+Town & Indicator for Town & 0.168 &  \\
+Village & Indicator for Village & 0.232 &  \\
+Coverage & Coverage in millions of dollars & 35.107 & 78.886 \\
+\bottomrule
+\end{tabular}
+\caption{Description and summary statistics of response and explanatory variables (training years 2006--2009).}
+\label{tab:lgpif summary}
+\end{table}
+
+
+%\section{Scatterplot of the frequency and joint frequency model selection}
+
+\begin{figure}[h!]
+\centering
+         \includegraphics[width=0.5\textwidth]{Frequency.png}\\
+         \includegraphics[width=0.5\textwidth]{FC.png}
+         \caption{Scatterplots of deductibles versus censored and truncated frequency.}
+         \label{fig:frequency scatterplot}
+\end{figure}
+
+\begin{table}[h!]
+\centering
+\resizebox{\linewidth}{!}{
+\begin{tabular}{lrrrrrrrr}
+\toprule
+\multicolumn{9}{c}{FCM1, FCM2} \\
+\midrule
+Family & logLik & AIC & BIC & $\tau$ & logLik & AIC & BIC & $\tau$ \\
+\midrule
+Independence & -3,546.36 & 7,108.71 & 7,159.36 & -- & -3,263.35 & 6,542.70 & 6,593.35 & -- \\
+Gaussian & -3,428.49 & 6,874.97 & 6,931.95 & -0.23 & -3,109.72 & 6,237.44 & 6,294.42 & -0.28 \\
+Student's t & -3,421.37 & 6,862.73 & 6,926.04 & -0.23 & -3,106.61 & 6,233.22 & 6,296.53 & -0.28 \\
+Clayton & -3,547.27 & 7,112.53 & 7,169.51 & 0.00 & -3,264.27 & 6,546.54 & 6,603.52 & 0.00 \\
+Gumbel & -3,547.33 & 7,112.66 & 7,169.64 & 0.00 & -3,264.34 & 6,546.67 & 6,603.66 & 0.00 \\
+Frank & -3,438.65 & 6,895.29 & 6,952.28 & -0.23 & -3,129.85 & 6,277.70 & 6,334.68 & -0.27 \\
+Joe & -3,547.36 & 7,112.72 & 7,169.70 & 0.00 & -3,264.37 & 6,546.73 & 6,603.72 & 0.00 \\
+Survival Clayton & -3,547.36 & 7,112.72 & 7,169.71 & 0.00 & -3,264.40 & 6,546.81 & 6,603.79 & 0.00 \\
+Survival Gumbel & -3,547.25 & 7,112.50 & 7,169.48 & 0.00 & -3,264.25 & 6,546.51 & 6,603.49 & 0.00 \\
+Survival Joe & -3,547.21 & 7,112.41 & 7,169.39 & 0.00 & -3,264.21 & 6,546.41 & 6,603.40 & 0.00 \\
+\bottomrule
+\end{tabular}
+}
+\caption{Copula candidate likelihood and information criteria: continuous deductible frequency models.}
+\label{tab:fcmcopula}
+\end{table}
+
+\begin{table}[h!]
+\centering
+\resizebox{\linewidth}{!}{
+\begin{tabular}{lrrrrrrrr}
+\toprule
+\multicolumn{9}{c}{FDM1, FDM2} \\
+\midrule
+Family & logLik & AIC & BIC & $\tau$ & logLik & AIC & BIC & $\tau$ \\
+\midrule
+Independence & -3,546.36 & 7,108.71 & 7,159.36 & -- & -3,249.17 & 6,514.33 & 6,564.98 & -- \\
+Gaussian & -3,419.33 & 6,856.66 & 6,913.64 & -0.23 & -3,101.91 & 6,221.81 & 6,278.80 & -0.27 \\
+Student's t & -3,410.77 & 6,841.53 & 6,904.85 & -0.25 & -3,100.41 & 6,220.82 & 6,284.13 & -0.28 \\
+Clayton & -3,547.22 & 7,112.44 & 7,169.42 & 0.00 & -3,249.97 & 6,517.95 & 6,574.93 & 0.00 \\
+Gumbel & -3,547.46 & 7,112.92 & 7,169.91 & 0.00 & -3,250.25 & 6,518.50 & 6,575.48 & 0.00 \\
+Frank & -3,419.34 & 6,856.68 & 6,913.66 & -0.24 & -3,112.02 & 6,242.04 & 6,299.02 & -0.27 \\
+Joe & -3,547.54 & 7,113.07 & 7,170.05 & 0.00 & -3,250.34 & 6,518.68 & 6,575.66 & 0.00 \\
+Survival Clayton & -3,547.56 & 7,113.12 & 7,170.10 & 0.00 & -3,250.38 & 6,518.77 & 6,575.75 & 0.00 \\
+Survival Gumbel & -3,547.26 & 7,112.52 & 7,169.50 & 0.00 & -3,250.02 & 6,518.05 & 6,575.03 & 0.00 \\
+Survival Joe & -3,547.15 & 7,112.29 & 7,169.27 & 0.00 & -3,249.91 & 6,517.81 & 6,574.79 & 0.00 \\
+\bottomrule
+\end{tabular}
+}
+\caption{Copula candidate likelihood and information criteria: discrete deductible frequency models.}
+\label{tab:fdmcopula}
+\end{table}
+
+%\pagebreak
+%\section{Scatterplot of the severity and \rev{joint severity} model selection}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.7\textwidth]{Severity.png}\\
+    \includegraphics[width=0.7\textwidth]{SC.png}
+    \caption{Scatterplots of deductibles versus severity.}
+    \label{fig:severity scatterplot}
+\end{figure}
+
+\begin{table}[h!]
+\centering
+\resizebox{\linewidth}{!}{
+\begin{tabular}{lrrrrrrrrrrrr}
+\toprule
+\multicolumn{13}{c}{SCM1, SCM2, SCM3} \\
+\midrule
+Family & logLik & AIC & BIC & $\tau$ & logLik & AIC & BIC & $\tau$ & logLik & AIC & BIC & $\tau$ \\
+\midrule
+Independence & -24,640.12 & 49,300.25 & 49,358.26 & -- & -21,482.20 & 42,984.41 & 43,042.42 & -- & -20,860.71 & 41,741.41 & 41,797.88 & -- \\
+Gaussian & -24,630.57 & 49,283.15 & 49,346.96 & 0.06 & -21,377.17 & 42,776.34 & 42,840.16 & 0.23 & -20,832.97 & 41,687.94 & 41,750.05 & 0.25 \\
+Student's t & -24,630.85 & 49,285.71 & 49,355.32 & 0.06 & -21,361.41 & 42,746.81 & 42,816.43 & 0.25 & -20,825.12 & 41,674.24 & 41,742.00 & 0.33 \\
+Clayton & -24,638.66 & 49,299.32 & 49,363.13 & 0.01 & -21,352.43 & 42,726.85 & 42,790.67 & 0.19 & -20,836.73 & 41,695.46 & 41,757.58 & 0.20 \\
+Gumbel & -24,626.83 & 49,275.67 & 49,339.49 & 0.08 & -21,405.77 & 42,833.55 & 42,897.36 & 0.23 & -20,836.65 & 41,695.30 & 41,757.42 & 0.29 \\
+Frank & -24,626.30 & 49,274.61 & 49,338.42 & 0.08 & -21,397.51 & 42,817.02 & 42,880.84 & 0.23 & -20,837.40 & 41,696.80 & 41,758.92 & 0.26 \\
+Joe & -24,626.46 & 49,274.92 & 49,338.73 & 0.08 & -21,448.40 & 42,918.79 & 42,982.61 & 0.14 & -20,848.28 & 41,718.55 & 41,780.67 & 0.16 \\
+Survival Clayton & -24,624.88 & 49,271.76 & 49,335.57 & 0.08 & -21,439.27 & 42,900.55 & 42,964.36 & 0.16 & -20,845.73 & 41,713.47 & 41,775.58 & 0.17 \\
+Survival Gumbel & -24,639.91 & 49,301.81 & 49,365.63 & 0.00 & -21,348.92 & 42,719.84 & 42,783.66 & 0.21 & -20,831.89 & 41,685.77 & 41,747.89 & 0.26 \\
+Survival Joe & -24,640.15 & 49,302.29 & 49,366.11 & 0.00 & -21,363.97 & 42,749.94 & 42,813.75 & 0.16 & -20,850.38 & 41,722.75 & 41,784.87 & 0.17 \\
+\bottomrule
+\end{tabular}
+}
+\caption{Copula candidate likelihood and information criteria: continuous deductible severity models.}
+\label{tab:scmcopula}
+\end{table}
+
+\begin{table}[h!]
+\centering
+\resizebox{\linewidth}{!}{
+\begin{tabular}{lrrrrrrrrrrrr}
+\toprule
+\multicolumn{13}{c}{SDM1, SDM2, SDM3} \\
+\midrule
+Family & logLik & AIC & BIC & $\tau$ & logLik & AIC & BIC & $\tau$ & logLik & AIC & BIC & $\tau$ \\
+\midrule
+Independence & -24,640.12 & 49,300.25 & 49,358.26 & -- & -21,482.18 & 42,984.37 & 43,042.38 & -- & -20,860.71 & 41,741.41 & 41,797.88 & -- \\
+Gaussian & -24,625.70 & 49,273.40 & 49,337.21 & 0.07 & -21,365.56 & 42,753.12 & 42,816.94 & 0.24 & -20,828.80 & 41,679.60 & 41,741.72 & 0.25 \\
+Student's t & -24,610.30 & 49,244.59 & 49,314.21 & 0.11 & -21,357.36 & 42,738.71 & 42,808.33 & 0.25 & -20,822.47 & 41,668.95 & 41,736.71 & 0.30 \\
+Clayton & -24,635.12 & 49,292.24 & 49,356.05 & 0.03 & -21,338.99 & 42,699.98 & 42,763.79 & 0.23 & -20,836.15 & 41,694.30 & 41,756.41 & 0.22 \\
+Gumbel & -24,617.37 & 49,256.75 & 49,320.57 & 0.09 & -21,400.58 & 42,823.15 & 42,886.97 & 0.21 & -20,824.48 & 41,670.97 & 41,733.08 & 0.29 \\
+Frank & -24,612.06 & 49,246.12 & 49,309.94 & 0.11 & -21,368.19 & 42,758.38 & 42,822.19 & 0.25 & -20,825.54 & 41,673.07 & 41,735.19 & 0.28 \\
+Joe & -24,620.16 & 49,262.32 & 49,326.14 & 0.08 & -21,441.76 & 42,905.52 & 42,969.34 & 0.14 & -20,832.22 & 41,686.44 & 41,748.56 & 0.24 \\
+Survival Clayton & -24,618.65 & 49,259.29 & 49,323.11 & 0.08 & -21,426.78 & 42,875.55 & 42,939.37 & 0.16 & -20,831.66 & 41,685.33 & 41,747.44 & 0.24 \\
+Survival Gumbel & -24,631.21 & 49,284.42 & 49,348.23 & 0.06 & -21,338.32 & 42,698.63 & 42,762.45 & 0.24 & -20,827.71 & 41,677.42 & 41,739.54 & 0.27 \\
+Survival Joe & -24,637.89 & 49,297.79 & 49,361.60 & 0.02 & -21,343.40 & 42,708.80 & 42,772.61 & 0.21 & -20,839.94 & 41,701.88 & 41,764.00 & 0.20 \\
+\bottomrule
+\end{tabular}
+}
+\caption{Copula candidate likelihood and information criteria: discrete deductible severity models.}
+\label{tab:sdmcopula}
+\end{table}
+
+\end{document}

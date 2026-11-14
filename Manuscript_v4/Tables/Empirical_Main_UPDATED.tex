@@ -1,0 +1,345 @@
+\section{Empirical Analysis}\label{sec:empirical}
+\subsection{Insurance Claim Dataset for Deductible, Frequency and Severity}
+
+As an empirical analysis, we chose a dataset from the Wisconsin local government property insurance fund (LGPIF). The LGPIF was founded to provide property insurance for local government entities covering properties such as government buildings, schools, libraries and motor vehicles. The coverage does not include the losses from catastrophic events like flood and earthquake. The annual premium paid by local government entities is about \$25 million and this fund insures \$75  billion each year. Description and summary statistics are illustrated in Appendix~\ref{app:D}, more information is {available at} \cite{lgpifwebpage}. The 1,038 policies which cover the loss from building and contents during 2006-2009 are taken from the LGPIF fund. Each policy has the deductible, the number of claims, the amount of claims, the ground-up amount per claim, the amount of coverage and risk classification. %Table~\ref{tab:lgpif summary} provides a summary statistics of LGPIF dataset with explanatory variables and response. \rev{On average, a policy-year has 0.589 claims, and the average ground-up loss per claim is about \$19,500.}\\
+
+{Although \citet{shi2022copula} examined the endogeneity of the deductible with the same LGPIF data, the present analysis takes a different perspective by considering the observation scenarios. \citet{shi2022copula} regarded all the observations as complete frequencies and ground-up severities, which is justified for the LGPIF data as discussed below. This makes the LGPIF data particularly suitable for our purpose: since the ground-up losses are available, we can construct the censored and truncated versions of the data by applying each policy's deductible to the observed ground-up losses, and we can compare the models fitted to the incomplete data with those fitted to the complete data. In other words, the censored and truncated datasets mimic the information that an insurer would have if losses below the deductible were recorded with zero payment or not recorded at all, while the complete dataset serves as a benchmark.} Table~\ref{tab:data summary} shows the summary statistics for the censored and truncated data. Note that the mean of truncated severity is higher than others as the entire number of claims decreases when the claims are truncated.
+
+ %(a loss below the deductible is recorded with zero payment under censored reporting, and is removed under truncated reporting)
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{lrrrrr}
+\toprule
+ & \multicolumn{2}{c}{Frequency} & \multicolumn{3}{c}{Severity} \\
+\cmidrule(lr){2-3}
+\cmidrule(lr){4-6}
+ & $N$ & $N^*$ & $Y$ & $(Y-d)_+$ & $Y-d\mid Y>d$ \\
+\midrule
+Mean & 0.59 & 0.50 & 19,514.69 & 17,524.16 & 20,453.23 \\
+SD & 1.54 & 1.31 & 154,221.25 & 152,175.68 & 164,225.40 \\
+\bottomrule
+\end{tabular}
+\caption{Summary statistics of frequency and severity under different observation scenarios (2006--2009).}
+\label{tab:data summary}
+\end{table}
+
+{The treatment of the original LGPIF observations as complete frequencies and ground-up severities relies on the institutional features of the fund. As noted by \citet{shi2022copula}, the LGPIF does not apply experience rating, so that policyholders have little incentive to withhold claims below the deductible, and the fund records the ground-up amount of every reported loss. A remaining limitation is that several small losses below the deductible may occasionally be reported as a single claim, which we cannot identify from the data; we therefore postulate the original observations as complete. Under this premise, censoring or truncating the data with each policy's deductible reproduces the observation scenariosand allows us to assess how the endogeneity of the deductible manifests itself under incomplete data.}
+
+\subsection{Marginal modeling of $D$}\label{section:marginalD}
+
+Before we test the endogeneity of the deductible in the LGPIF dataset, we firstly consider the marginal models for $D$ as continuous/discrete variables. When the deductible is assumed to follow a continuous distribution, we  model the deductible ratio, denoted as $R$ (deductible divided by the coverage) as a continuous response using GB2 distribution, which is equivalent to model the continuous deductible by using -log(Coverage) as an offset. 
+
+We also consider the case where deductible is assumed to be discrete since there are ten distinct deductibles (500, 1000, 2500, 5000, 10000, 15000, 25000, 50000, 75000, 100000) in the dataset, which allows us to treat them as an ordinal variable and to be classified into 10 distinct classes. The estimation results for the continuous and discrete deductible are given in Appendix~\ref{app:C} (Table~\ref{tab:contD}, Figure~\ref{fig:contD}).
+
+\subsection{Marginal modeling of $N, Y$ under exogeneity assumption}
+\label{section:marginalNY}
+
+In this section, we investigate the deductible's exogeneity via marginal modeling of $N, Y$. First, three models (SEM1--3) for $Y$ are implemented. Table~\ref{marginalY} provides regression estimates of the fixed effects from SEM1--3. \rev{Differences in $\beta_Y$ estimates, with unusually large $\alpha_1$ in SEM2, motivate further examination beyond the exogeneity assumption. Even though a formal test of deductible exogeneity is not available, one may observe preliminary evidences implying a dependence in deductible.}
+
+%\rev{Throughout Sections~\ref{section:marginalNY} and \ref{sec:jointcopula}, the reported standard errors are the sandwich (Godambe) standard errors of Section 2.3; for the single-stage marginal models they reduce to the robust sandwich estimator $\bm{H}_{kk}^{-1}\bm{J}_{kk}\bm{H}_{kk}^{-1}$.}
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{lrrrrrr}
+\toprule
+Parameter & SEM1 estimate & s.e. & SEM2 estimate & s.e. & SEM3 estimate & s.e. \\
+\midrule
+Intercept & 7.341 & 0.184 & 1.656 & 0.437 & 6.293 & 2.312 \\
+TypeCity & 0.019 & 0.154 & 0.004 & 0.141 & 0.381 & 0.214 \\
+TypeCounty & -0.012 & 0.172 & -0.083 & 0.154 & 0.552 & 0.265 \\
+TypeSchool & 0.485 & 0.168 & 0.362 & 0.150 & 0.878 & 0.287 \\
+TypeTown & -0.175 & 0.171 & -0.121 & 0.154 & 0.014 & 0.258 \\
+TypeVillage & 0.075 & 0.141 & 0.043 & 0.129 & 0.350 & 0.209 \\
+$\log(\mathrm{Coverage})$ & 0.011 & 0.033 & 0.055 & 0.030 & -0.071 & 0.042 \\
+$\sigma$ & 0.655 & 0.108 & 1.103 & 0.091 & 0.927 & 0.527 \\
+$\alpha_1$ & 1.311 & 0.354 & 252.795 & 21.489 & 3.176 & 7.636 \\
+$\alpha_2$ & 0.619 & 0.129 & 1.130 & 0.147 & 0.954 & 0.624 \\
+\bottomrule
+\end{tabular}
+\caption{Regression estimates and Godambe sandwich standard errors of the marginal severity models.}
+\label{marginalY}
+\end{table}
+
+\rev{Specifically, the estimated coefficient for log(Coverage) in SEM3 is negative where the expected severity decreases as the log(Coverage) increases in SEM3, which is not intuitive in non-life insurance. The estimated regression coefficients of the severity marginal model might lead to different orderings of the premiums. Figure \ref{fig:logcov_variation} displays variation of  the linear predictors of policyholder $i=1,\ldots, I$,  $\mu_i=\bm{x}_i\beta_{Y}$, for the three severity models within each entity type by varying the log(Coverage) amount. It is observed that $\mu_i$s from SEM3 are negatively correlated with the log(Coverage) in all entity types unlike those from SEM1 and SEM2, due to different signs of estimated coefficient for log(Coverage).}
+
+\begin{figure}[!h]
+\centering
+%\includegraphics[width=0.65\columnwidth]{GB2-pwscatter-marginal.pdf}
+%\caption{Pairwise scatterplots of the predictive $\mu$ with the marginal severity models}
+\includegraphics[width=\columnwidth]{mu_vs_logcoverage_unified.pdf}
+\caption{Variation of predictive $\mu$ per log(Coverage) with the severity models under exogeneity}\label{fig:logcov_variation}
+\end{figure}
+
+\color{black}
+%Figure~\ref{fig:YQQplots} uses the ground-up loss observations and the regression coefficients from SEM1, SEM2, and SEM3 to draw the QQ plots and assess the goodness-of-fit, respectively. It is straightforward to observe that the regression estimates from SEM1 show the best fit to the ground-up losses. \rev{Since SEM1, SEM2 and SEM3 are the same model under the exogeneity assumption (Section 2.4), the discrepancies among their estimates and their fits to the ground-up losses are difficult to reconcile with the exogeneity of the deductible, and motivate the joint severity models of Section~\ref{sec:jointcopula}.}
+
+%\begin{figure}[!h]
+%\centering
+%\includegraphics[width=0.95\columnwidth]{SevQQplots.pdf}
+%\caption{qq-plots of the marginal severity models with the ground-up/censored/truncated losses}
+%\includegraphics[width=0.95\columnwidth]{qq_sem.pdf}
+%\caption{QQ-plots of the ground-up losses from the severity models under exogeneity}\label{fig:YQQplots}
+%\end{figure}
+
+
+\FloatBarrier
+
+\rev{Table \ref{tab:MFreq_LGPIF} provides regression estimates of the fixed effects from FEM1 and FEM2. Differences between the corresponding $\beta_N$ estimates are informative about the compound effect of observation scenario and severity-model. Though they are not by themselves proof that deductibles are endogenous to frequency, comparison between marginal and joint model needs to be conducted in further section.}
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{lrrrr}
+\toprule
+Parameter & FEM1 estimate & s.e. & FEM2_SEM3 estimate & s.e. \\
+\midrule
+Intercept & -2.808 & 0.186 & -2.461 & 0.202 \\
+TypeCity & 1.096 & 0.183 & 0.424 & 0.193 \\
+TypeCounty & 1.200 & 0.190 & 0.303 & 0.217 \\
+TypeSchool & -0.005 & 0.184 & -0.693 & 0.217 \\
+TypeTown & 0.354 & 0.238 & 0.129 & 0.239 \\
+TypeVillage & 0.743 & 0.183 & 0.226 & 0.191 \\
+$\log(\mathrm{Coverage})$ & 0.546 & 0.030 & 0.741 & 0.036 \\
+$r$ & 0.910 & 0.070 & 1.850 & 0.216 \\
+\bottomrule
+\end{tabular}
+\caption{Regression estimates and Godambe sandwich standard errors of the marginal frequency models (FEM2 denotes FEM2_SEM3).}
+\label{tab:MFreq_LGPIF}
+\end{table}
+
+%Table \ref{tab:FreqmarginalGOF} showcases the actual and expected values of censored and truncated frequencies using the estimated regression coefficients from FEM1 and FEM2. FEM1 and FEM2 provide a comparable level of goodness-of-fit for $N$ and $N$ respectively. \rev{The column ``Truncated--FEM1'' reports the expected truncated frequencies implied by FEM1 under the exogeneity assumption, i.e., obtained from $N|D=d;\bm{x}\sim\mathcal{NB}(r, p(d;\bm{x})\exp(\bm{x}\beta_N)/r)$ with $\beta_N$ and $r$ estimated from the complete data by FEM1 and $p(d;\bm{x})$ computed from SEM1. If the deductible were exogenous, this thinned distribution would be the correct distribution of $N$ by \eqref{eq:fg}, and the fit should be as good as that of FEM1 to $N$. Instead, the expected counts are markedly too low for $N\ge 1$ ($\chi^2$ statistic of 83.71 versus 11.19 for $N$), whereas FEM2, which is fitted directly to the truncated frequencies, fits well (12.67). Since FEM1 fits $N$ well, this lack of fit is not attributable to the negative binomial specification itself; rather, it indicates that the thinning under exogeneity (with $p(d;\bm{x})$ computed from the marginal severity distribution) does not reproduce the observed truncated frequencies, which is consistent with the discrepancy between the FEM1 and FEM2 estimates in Table~\ref{tab:MFreq_LGPIF}. We acknowledge that such a lack of fit could also arise from other sources of misspecification (for instance, in the severity model used to compute $p(d;\bm{x})$); it does not prove endogeneity by itself, but together with the coefficient discrepancies it casts doubt on the exogeneity assumption and motivates the joint frequency models below, whose fit is examined in Table~\ref{tab:Freqcopula}.}
+
+%\begin{table}[!h]
+%\centering
+%\color{blue}
+%\begin{tabular}[t]{lrrrrr}
+%\toprule
+%\multicolumn{1}{c}{ } & \multicolumn{2}{c}{Censored} & \multicolumn{3}{c}{Truncated} \\
+%\cmidrule(l{3pt}r{3pt}){2-3} \cmidrule(l{3pt}r{3pt}){4-6}
+%  & Empirical & FEM1 & Empirical & FEM1 & FEM2\\
+%\midrule
+%0 & 2965 & 2974.63 & 3051 & 3241.99 & 3019.85\\
+%1 & 703 & 678.57 & 674 & 598.04 & 715.60\\
+%2 & 241 & 241.91 & 229 & 175.82 & 227.90\\
+%3 & 103 & 107.75 & 86 & 67.03 & 90.24\\
+%4 & 57 & 55.29 & 49 & 30.31 & 41.71\\
+%5 & 18 & 31.35 & 19 & 15.43 & 21.54\\
+%6 & 13 & 19.11 & 9 & 8.55 & 12.09\\
+%7 & 14 & 12.31 & 10 & 5.04 & 7.23\\
+%8 & 12 & 8.26 & 9 & 3.12 & 4.56\\
+%$>=9$ & 26 & 22.82 & 16 & 6.68 & 11.28\\
+%\hline
+%$\chi^2$--stat & 0.00 & 11.19 & 0.00 & 83.71 & 12.67\\
+%\hhline{======}
+%\end{tabular}
+%\caption{Goodness-of-fit of the marginal frequency models}
+%\label{tab:FreqmarginalGOF}
+%\end{table}
+
+\FloatBarrier
+
+\subsection{Joint copula modeling with the deductible's endogeneity}\label{sec:jointcopula}
+
+At this stage, we fit {bivariate copula families} for $C_{DN},C_{DY}$ to model the pair $(D, N),(D, Y)$. Table~\ref{tab:lgpif_dependence} summarizes the selected copula for each model and scenario. Details of copula selection can be found in Appendix~\ref{app:D} (Tables \ref{tab:fcmcopula}--~\ref{tab:sdmcopula}). \rev{While Student's $t$ copula is selected for all the joint frequency models, several families are chosen for the joint severity models depending on observation scenario. Since the true dependence model is unknown, we treat each copula family as a candidate model. The estimated $\tau_Y$ is positive in all severity models, indicating that, given the rating variables, policyholders with larger ground-up losses tend to choose higher deductibles, aligned with the findings of \citet{shi2022copula}. The estimated $\tau_N$ is negative in all frequency models, implying that policies with higher deductibles experience fewer loss events. Moreover, magnitudes of $\tau_Y$ and $\tau_N$ are higher in the censored or truncated data than from the complete data.}
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{llr}
+\toprule
+Model & Selected family & $\widehat{\tau}$ (s.e.) \\
+\midrule
+SCM1 & Survival Clayton & 0.080 (0.025) \\
+SCM2 & Survival Gumbel & 0.214 (0.019) \\
+SCM3 & Student's t & 0.327 (0.030) \\
+SDM1 & Student's t & 0.106 (0.036) \\
+SDM2 & Survival Gumbel & 0.240 (0.018) \\
+SDM3 & Student's t & 0.303 (0.034) \\
+FCM1 & Student's t & -0.229 (0.015) \\
+FCM2 & Student's t & -0.281 (0.019) \\
+FDM1 & Student's t & -0.246 (0.015) \\
+FDM2 & Student's t & -0.279 (0.023) \\
+\bottomrule
+\end{tabular}
+\caption{Selected copula families and dependence estimates for the LGPIF dataset.}
+\label{tab:lgpif_dependence}
+\end{table}
+
+\rev{Table~\ref{tab:Sevcopularesult} illustrates the estimation results of the joint severity models. One can observe that the estimate of log(Coverage) from all models is positive, being more intuitive than the result of the marginal model SEM3. The estimated entity-type effects, however, differ noticeably between the complete-data model and the incomplete-data models when the deductible is treated as continuous, whereas they are more stable in SDM1--3.}
+%We also note that under censored scenario the lower tail of the ground-up loss distribution, which is governed by the GB2 parameter $\alpha_1$, is not observed, so that $\alpha_1$ is only weakly identified in SEM2, SCM2 and SDM2. In SDM2, the estimate of $\alpha_1$ drifts to a very large value with a correspondingly large standard error; this reflects the lack of identification of the lower tail rather than a feature of the data (as $\alpha_1\to\infty$ the GB2 distribution approaches a generalized gamma distribution), and the remaining parameters of SDM2 are estimated with a precision comparable to that of the other models. Finally, the sandwich standard errors in Table~\ref{tab:Sevcopularesult} exceed the stage-wise standard errors that treat the deductible model as known by 25--65\% for log(Coverage) and by 15--130\% for $\tau_Y$ (the largest increases being for SCM1 and SDM1), whereas they are of similar size for the entity-type effects: the dependence parameter is the quantity most affected by the sampling variability of $F_D(d;\bm{x})$, which enters the copula, and its precision would be overstated by the stage-wise standard errors.
+
+\begin{table}[h!]
+\centering
+\resizebox{\linewidth}{!}{
+\begin{tabular}{lrrrrrrrrrrrr}
+\toprule
+Parameter & SCM1 estimate & s.e. & SCM2 estimate & s.e. & SCM3 estimate & s.e. & SDM1 estimate & s.e. & SDM2 estimate & s.e. & SDM3 estimate & s.e. \\
+\midrule
+Intercept & 7.320 & 0.190 & 6.239 & 0.457 & 6.091 & 0.895 & 7.406 & 0.164 & 4.046 & 1.240 & 6.387 & 1.678 \\
+TypeCity & -0.074 & 0.159 & -1.030 & 0.133 & -1.014 & 0.257 & -0.082 & 0.157 & -0.230 & 0.128 & -0.084 & 0.192 \\
+TypeCounty & -0.154 & 0.186 & -1.295 & 0.156 & -1.150 & 0.300 & -0.117 & 0.183 & -0.316 & 0.145 & 0.031 & 0.219 \\
+TypeSchool & 0.394 & 0.176 & -0.632 & 0.144 & -0.456 & 0.272 & 0.448 & 0.172 & 0.147 & 0.135 & 0.510 & 0.228 \\
+TypeTown & -0.140 & 0.175 & 0.044 & 0.139 & 0.361 & 0.248 & -0.147 & 0.173 & -0.072 & 0.148 & 0.094 & 0.246 \\
+TypeVillage & 0.044 & 0.144 & -0.486 & 0.114 & -0.273 & 0.207 & 0.022 & 0.142 & -0.081 & 0.120 & 0.128 & 0.182 \\
+$\log(\mathrm{Coverage})$ & 0.045 & 0.038 & 0.403 & 0.038 & 0.486 & 0.074 & 0.053 & 0.041 & 0.163 & 0.027 & 0.171 & 0.054 \\
+$\sigma$ & 0.659 & 0.108 & 0.918 & 0.166 & 1.144 & 0.330 & 0.615 & 0.098 & 1.166 & 0.130 & 0.991 & 0.509 \\
+$\alpha_1$ & 1.307 & 0.349 & 4.720 & 2.218 & 3.586 & 2.963 & 1.207 & 0.292 & 30.049 & 27.235 & 2.971 & 5.167 \\
+$\alpha_2$ & 0.588 & 0.127 & 0.956 & 0.232 & 1.102 & 0.424 & 0.570 & 0.116 & 1.271 & 0.204 & 0.948 & 0.598 \\
+$\tau$ & 0.080 & 0.025 & 0.214 & 0.019 & 0.327 & 0.030 & 0.106 & 0.036 & 0.240 & 0.018 & 0.303 & 0.034 \\
+$\nu$ & -- & -- & -- & -- & 10.597 & 2.755 & 6.551 & 2.124 & -- & -- & 7.760 & 2.224 \\
+\bottomrule
+\end{tabular}
+}
+\caption{Regression estimates and Godambe sandwich standard errors of the selected joint severity models.}
+\label{tab:Sevcopularesult}
+\end{table}
+
+%In Figure~\ref{qq_sev_copula}, the QQ-plots of \rev{the ground-up losses $Y$} under SCM1/2/3 and SDM1/2/3 are drawn\rev{, using the conditional distribution functions $F_{Y|D}(y|d;\bm{x})$ of \eqref{eq:SCM} and \eqref{eq:SDM}}. One can \rev{observe} that
+%\begin{itemize}
+%\item \rev{SCM1 and SDM1 fit the ground-up losses well over the whole range of the distribution.}
+%\item Goodness-of-fits of SCM2/SDM2 are improved compared to that of SEM2, in the sense that they cover most of the body parts of the diagonal after the endogenous deductible is considered\rev{, while the lower tail, which corresponds to the losses below the deductible that are censored, remains poorly captured}.
+%\item Goodness-of-fits of SCM3/SDM3 are improved compared to that of SEM3, in the sense that the QQ-plots are now closer to the diagonal line, which is the ideal case\rev{, except in the extreme lower tail}. It is interesting to observe that although SCM3/SDM3 were fitted with truncated data, their model fits to the ground-up loss are even comparable to SCM1/SDM1, which utilized the fully observed severity.
+%\end{itemize}
+
+%\begin{figure}[!h]
+%\centering
+%\includegraphics[width=0.85\columnwidth]{qq_joint.pdf}
+%\caption{QQ-plots for the ground-up losses in joint models}
+%\label{qq_sev_copula}
+%\end{figure}
+
+%\FloatBarrier
+
+\rev{Table~\ref{tab:freqcopularesult} shows the estimation results of the joint frequency models. Compared to Table~\ref{tab:MFreq_LGPIF}, the estimates from FCM2 and FDM2 are closer to those of FCM1 and FDM1 in sign and magnitude. Estimated $\tau_N$ is stable across the two observation scenarios for both treatments of the deductible. Once the endogeneity of the deductible is taken into account, the truncated claim counts could carry more information about the risk classification as the complete claim counts.} %The sandwich standard errors of the truncated joint models FCM2 and FDM2 are 15--50\% larger than the stage-wise ones, reflecting the additional uncertainty transmitted through $p(d;\bm{x})$ from the severity model, whereas the increase is at most 20\% for FCM1 and FDM1.
+
+\begin{table}[h!]
+\centering
+\resizebox{\linewidth}{!}{
+\begin{tabular}{lrrrrrrrr}
+\toprule
+Parameter & FCM1 estimate & s.e. & FCM2 estimate & s.e. & FDM1 estimate & s.e. & FDM2 estimate & s.e. \\
+\midrule
+Intercept & -2.601 & 0.184 & -2.235 & 0.184 & -2.773 & 0.175 & -2.513 & 0.183 \\
+TypeCity & 1.707 & 0.176 & 1.583 & 0.201 & 1.095 & 0.172 & 0.854 & 0.180 \\
+TypeCounty & 1.929 & 0.186 & 1.715 & 0.225 & 1.155 & 0.183 & 0.791 & 0.197 \\
+TypeSchool & 0.617 & 0.178 & 0.475 & 0.211 & -0.002 & 0.173 & -0.278 & 0.187 \\
+TypeTown & 0.101 & 0.233 & -0.162 & 0.235 & 0.273 & 0.229 & 0.105 & 0.231 \\
+TypeVillage & 0.967 & 0.175 & 0.753 & 0.187 & 0.723 & 0.172 & 0.485 & 0.177 \\
+$\log(\mathrm{Coverage})$ & 0.321 & 0.034 & 0.266 & 0.047 & 0.537 & 0.029 & 0.551 & 0.037 \\
+$r$ & 0.835 & 0.067 & 0.855 & 0.085 & 0.964 & 0.076 & 1.069 & 0.112 \\
+$\tau$ & -0.229 & 0.015 & -0.281 & 0.019 & -0.246 & 0.015 & -0.279 & 0.023 \\
+$\nu$ & 11.058 & 3.178 & 13.647 & 5.734 & 6.900 & 1.894 & 12.333 & 8.148 \\
+\bottomrule
+\end{tabular}
+}
+\caption{Regression estimates and Godambe sandwich standard errors of the selected joint frequency models.}
+\label{tab:freqcopularesult}
+\end{table}
+
+Table~\ref{tab:Freqcopula} showcases the actual and expected values of $N|D$ using the estimated regression coefficients from all models. \rev{While FEM1, FCM1 and FDM1 provide comparable fits, models with truncated data provide a large deviation. Particularly, FEM2 shows high discrepancy between observed and expected frequency. Though FCM2 and FDM2 are fitted with truncated data, two models still displays comparable fits to those from complete data. Together with Table~\ref{tab:freqcopularesult}, this shows that the joint models with truncated data can reproduce both the observe counts and the risk classification of the complete data.} 
+
+\begin{table}[h!]
+\centering
+\resizebox{\linewidth}{!}{
+\begin{tabular}{lrrrrrrr}
+\toprule
+$N$ & Empirical & FEM1 & FEM2 & FCM1 & FCM2 & FDM1 & FDM2 \\
+\midrule
+0 & 2,965 & 2,974.62 & 2,602.48 & 2,967.89 & 2,926.14 & 2,967.73 & 2,905.97 \\
+1 & 703 & 678.58 & 795.85 & 684.56 & 710.83 & 689.52 & 722.56 \\
+2 & 241 & 241.92 & 327.16 & 246.58 & 258.10 & 244.38 & 259.51 \\
+3 & 103 & 107.75 & 159.72 & 109.28 & 113.79 & 107.34 & 114.19 \\
+4 & 57 & 55.29 & 87.64 & 55.29 & 56.95 & 54.10 & 57.40 \\
+5 & 18 & 31.34 & 52.41 & 30.80 & 31.29 & 30.13 & 31.81 \\
+6 & 13 & 19.11 & 33.47 & 18.46 & 18.47 & 18.10 & 18.99 \\
+7 & 14 & 12.31 & 22.49 & 11.70 & 11.51 & 11.53 & 12.01 \\
+8 & 12 & 8.26 & 15.74 & 7.73 & 7.47 & 7.68 & 7.94 \\
+>=9 & 26 & 22.82 & 55.03 & 19.72 & 17.45 & 21.49 & 21.62 \\
+\midrule
+$\chi^2$ statistic & -- & 11.19 & 169.40 & 12.79 & 17.50 & 10.88 & 15.32 \\
+\bottomrule
+\end{tabular}
+}
+\caption{Goodness-of-fit for the common ground-up frequency distribution $N$ (descriptive Pearson statistics).}
+\label{tab:Freqcopula}
+\end{table}
+
+\rev{Table~\ref{tab:insample} compares the in-sample predictive performance of nine ratemaking frameworks. Predictive accuracy is evaluated using the mean absolute error (MAE), root mean squared error (RMSE), observed-to-predicted (O/P) ratio, and mean Poisson deviance (MPD), 
+\begin{align*}
+\text{MAE}&:=\frac{1}{n}\sum_{i=1}^{n}\left|S_i-\hat\pi_i\right|,\qquad
+\text{RMSE}:=\sqrt{\frac{1}{n}\sum_{i=1}^{n}(S_i-\hat\pi_i)^2},\qquad \text{O/P}:=\frac{\sum_{i=1}^{n}S_i}{\sum_{i=1}^{n}\hat\pi_i}\\
+\text{MPD}&:=\frac{2}{n}\sum_{i=1}^{n}\left[S_i\log\left(\frac{S_i}{\widehat{\pi}_i}\right)-\left(S_i-\widehat{\pi}_i\right)\right]
+\end{align*}
+where $S_i$ is an observed insured loss of $i$th policy and $\hat{\pi}_i$ is fitted pure premium. Although the truncated-data specifications (ER3) yield larger MAE and RMSE, the endogenous frameworks provide substantial improvements. In particular, ER2 consistently outperforms in all measure under both continuous and discrete deductible while mean Poisson deviance is improved across all scenarios. Overall, these results suggest that accounting for deductible endogeneity can improve the in-sample predictive performance of pure premium models.} 
+
+\begin{table}[h!]
+\centering
+\resizebox{\linewidth}{!}{
+\begin{tabular}{lrrrrrrrrr}
+\toprule
+ & \multicolumn{3}{c}{Case 1: Exogenous} & \multicolumn{3}{c}{Case 4c: Continuous} & \multicolumn{3}{c}{Case 4d: Discrete} \\
+\cmidrule(lr){2-4}
+\cmidrule(lr){5-7}
+\cmidrule(lr){8-10}
+ & XR1 & XR2 & XR3 & ER1 & ER2 & ER3 & ER1 & ER2 & ER3 \\
+\midrule
+MAE & 20,261.82 & 17,900.02 & 18,617.79 & 19,361.47 & 17,491.09 & 19,063.80 & 23,261.92 & 17,010.93 & 21,072.88 \\
+RMSE & 117,125.95 & 116,649.86 & 116,900.15 & 116,650.11 & 116,668.61 & 117,307.69 & 123,344.33 & 116,555.85 & 118,371.29 \\
+O/P (\%) & 59.86 & 73.03 & 68.14 & 65.83 & 76.67 & 68.17 & 51.86 & 81.24 & 59.10 \\
+MPD & 56,559.27 & 54,735.87 & 55,254.52 & 54,615.01 & 53,603.00 & 54,098.10 & 56,051.87 & 52,070.04 & 53,031.58 \\
+\bottomrule
+\end{tabular}
+}
+\caption{In-sample coverage-limited pure premium comparison (training years 2006--2009).}
+\label{tab:insample}
+\end{table}
+
+\FloatBarrier
+
+\subsection{Out-of-sample validation}
+\label{sec:outofsample}
+\textcolor{red}{We use the observations from 2010 as the out-of-sample validation set. There exists the largest amount of a single claim in 2010 which account for 18.13\% of total ground-up loss between 2006 and 2010. Out-of-sample validations are implemented in case of being with and without the extreme claim.}
+%Table~\ref{tab:2010lgpif summary} shows the summary statistics of data in 2010\rev{, where the proportions of the entity types are the same as in 2006--2009}.
+
+\begin{table}[h!]
+\centering
+\resizebox{\linewidth}{!}{
+\begin{tabular}{lrrrrrrrrr}
+\toprule
+ & \multicolumn{3}{c}{Case 1: Exogenous} & \multicolumn{3}{c}{Case 4c: Continuous} & \multicolumn{3}{c}{Case 4d: Discrete} \\
+\cmidrule(lr){2-4}
+\cmidrule(lr){5-7}
+\cmidrule(lr){8-10}
+ & XR1 & XR2 & XR3 & ER1 & ER2 & ER3 & ER1 & ER2 & ER3 \\
+\midrule
+MAE & 36,594.31 & 34,249.21 & 34,852.59 & 35,406.05 & 33,725.67 & 35,046.90 & 38,684.65 & 33,218.22 & 36,399.60 \\
+RMSE & 414,857.31 & 414,958.97 & 414,789.72 & 415,321.80 & 414,882.05 & 415,263.72 & 418,537.62 & 414,946.05 & 415,823.31 \\
+O/P (\%) & 151.26 & 184.54 & 171.20 & 172.22 & 192.57 & 173.74 & 138.15 & 204.51 & 151.92 \\
+MPD & 198,970.93 & 204,907.88 & 199,727.51 & 213,870.16 & 204,292.79 & 207,706.66 & 219,866.98 & 208,539.26 & 210,818.02 \\
+\bottomrule
+\end{tabular}
+}
+\caption{Out-of-sample coverage-limited pure premium comparison (all 2010 policy-years).}
+\label{tab:oos1}
+\end{table}
+
+\begin{table}[h!]
+\centering
+\resizebox{\linewidth}{!}{
+\begin{tabular}{lrrrrrrrrr}
+\toprule
+ & \multicolumn{3}{c}{Case 1: Exogenous} & \multicolumn{3}{c}{Case 4c: Continuous} & \multicolumn{3}{c}{Case 4d: Discrete} \\
+\cmidrule(lr){2-4}
+\cmidrule(lr){5-7}
+\cmidrule(lr){8-10}
+ & XR1 & XR2 & XR3 & ER1 & ER2 & ER3 & ER1 & ER2 & ER3 \\
+\midrule
+MAE & 24,195.32 & 21,843.17 & 22,449.41 & 22,999.48 & 21,318.61 & 22,640.73 & 26,278.10 & 20,808.52 & 23,993.66 \\
+RMSE & 109,272.95 & 109,094.87 & 108,718.51 & 110,275.45 & 108,739.34 & 110,143.82 & 121,505.50 & 108,728.60 & 112,112.82 \\
+O/P (\%) & 83.60 & 101.98 & 94.62 & 95.16 & 106.42 & 96.00 & 76.30 & 113.01 & 83.93 \\
+MPD & 66,170.29 & 66,034.27 & 63,922.32 & 72,507.25 & 64,649.63 & 67,500.47 & 72,911.15 & 65,479.98 & 68,914.25 \\
+\bottomrule
+\end{tabular}
+}
+\caption{Out-of-sample sensitivity analysis excluding the single 2010 policy-year with the largest observed aggregate limited loss.}
+\label{tab:oos2}
+\end{table}

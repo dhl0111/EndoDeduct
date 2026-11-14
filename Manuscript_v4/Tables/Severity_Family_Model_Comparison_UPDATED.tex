@@ -1,0 +1,28 @@
+\begin{table}[h!]
+\renewcommand{\tabcolsep}{2mm}
+\renewcommand{\arraystretch}{0.75}
+\centering
+\footnotesize
+\begin{tabular}{lrrrrrrrrr}
+\toprule
+& \textbf{GB2} & \textbf{GP} & \textbf{Burr} & \textbf{IBurr} & \textbf{Pareto} & \textbf{Loglogi} & \textbf{GG} & \textbf{Weibull} & \textbf{Gamma} \\
+\midrule
+\textbf{Ground} \\
+Likelihood & -24640.1 & -24645.0 & -24640.9 & -24643.5 & -24767.8 & -24686.5 & -24823.9 & -25209.7 & -25654.0 \\
+AIC & 49300.2 & 49307.9 & 49299.8 & 49305.0 & 49551.6 & 49388.9 & 49665.8 & 50435.4 & 51324.0 \\
+BIC & 49358.3 & 49360.1 & 49352.0 & 49357.2 & 49598.0 & 49435.4 & 49718.1 & 50481.8 & 51370.4 \\
+\midrule
+\textbf{Censored} \\
+Likelihood & -21482.3 & -21482.6 & -21500.8 & -21482.5 & -21687.9 & -21586.0 & -21725.4 & -22105.9 & -22521.6 \\
+AIC & 42984.7 & 42983.1 & 43019.6 & 42983.0 & 43391.8 & 43187.9 & 43468.8 & 44227.7 & 45059.2 \\
+BIC & 43042.7 & 43035.3 & 43071.8 & 43035.2 & 43438.2 & 43234.3 & 43521.0 & 44274.1 & 45105.6 \\
+\midrule
+\textbf{Truncated} \\
+Likelihood & -20860.7 & -20860.7 & -20861.1 & -20860.7 & -20867.2 & -20864.4 & -20917.2 & -20931.9 & -21203.6 \\
+AIC & 41741.4 & 41739.4 & 41740.1 & 41739.4 & 41750.3 & 41744.9 & 41852.3 & 41879.8 & 42423.2 \\
+BIC & 41797.9 & 41790.3 & 41790.9 & 41790.2 & 41795.5 & 41790.1 & 41903.1 & 41924.9 & 42468.4 \\
+\bottomrule
+\end{tabular}
+\caption{In-sample Model Selection Criteria for Ground, Censored, and Truncated Data}
+\label{tab:model_comparison}
+\end{table}

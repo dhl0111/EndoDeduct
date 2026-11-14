@@ -1,0 +1,31 @@
+\begin{table}[h!]
+\centering
+\resizebox{\linewidth}{!}{
+\begin{tabular}{lrr@{\hspace{1cm}}lrr}
+\toprule
+\multicolumn{3}{c}{Continuous deductible} & \multicolumn{3}{c}{Discrete deductible} \\
+\cmidrule(lr){1-3}
+\cmidrule(lr){4-6}
+Parameter & Estimate & s.e. & Parameter & Estimate & s.e. \\
+\midrule
+Intercept & 5.858 & 0.118 & 1|2 & 1.283 & 0.120 \\
+TypeCity & -2.296 & 0.076 & 2|3 & 2.320 & 0.124 \\
+TypeCounty & -2.928 & 0.097 & 3|4 & 3.146 & 0.128 \\
+TypeSchool & -2.089 & 0.069 & 4|5 & 4.451 & 0.138 \\
+TypeTown & 0.582 & 0.074 & 5|6 & 5.117 & 0.146 \\
+TypeVillage & -1.067 & 0.071 & 6|7 & 5.447 & 0.151 \\
+$\sigma$ & 0.846 & 0.094 & 7|8 & 7.190 & 0.216 \\
+$\alpha_1$ & 1.701 & 0.320 & 8|9 & 8.036 & 0.286 \\
+$\alpha_2$ & 1.218 & 0.198 & 9|10 & 8.345 & 0.321 \\
+ &  &  & TypeCity & 1.339 & 0.146 \\
+ &  &  & TypeCounty & 1.828 & 0.183 \\
+ &  &  & TypeSchool & 0.852 & 0.136 \\
+ &  &  & TypeTown & -0.181 & 0.149 \\
+ &  &  & TypeVillage & 0.699 & 0.128 \\
+ &  &  & $\log(\mathrm{Coverage})$ & -0.967 & 0.032 \\
+\bottomrule
+\end{tabular}
+}
+\caption{Regression estimates and stage-wise standard errors of deductible models.}
+\label{tab:Deduct}
+\end{table}
