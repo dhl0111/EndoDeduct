@@ -1,0 +1,26 @@
+\begin{table}[!htbp]
+\centering
+\color{blue}
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{lrrrrrrr}
+\toprule
+Count & Empirical & FEM1 & FEM2 & FCM1 & FCM2 & FDM1 & FDM2 \\
+\midrule
+0 & 2965 & 2974.62 & 2602.48 & 2967.89 & 2926.14 & 2967.73 & 2905.97 \\
+1 & 703 & 678.58 & 795.85 & 684.56 & 710.83 & 689.52 & 722.56 \\
+2 & 241 & 241.92 & 327.16 & 246.58 & 258.10 & 244.38 & 259.51 \\
+3 & 103 & 107.75 & 159.72 & 109.28 & 113.79 & 107.34 & 114.19 \\
+4 & 57 & 55.29 & 87.64 & 55.29 & 56.95 & 54.10 & 57.40 \\
+5 & 18 & 31.34 & 52.41 & 30.80 & 31.29 & 30.13 & 31.81 \\
+6 & 13 & 19.11 & 33.47 & 18.46 & 18.47 & 18.10 & 18.99 \\
+7 & 14 & 12.31 & 22.49 & 11.70 & 11.51 & 11.53 & 12.01 \\
+8 & 12 & 8.26 & 15.74 & 7.73 & 7.47 & 7.68 & 7.94 \\
+$\geq9$ & 26 & 22.82 & 55.03 & 19.72 & 17.45 & 21.49 & 21.62 \\
+\midrule
+$\chi^2$--stat & -- & 11.19 & 169.40 & 12.79 & 17.50 & 10.88 & 15.32 \\
+\bottomrule
+\end{tabular}%
+}
+\caption{Descriptive goodness-of-fit for the ground-up claim count $N$ for all frequency models. Expected counts for FEM2, FCM2, and FDM2 are computed from their fitted latent ground-up frequency distributions rather than their thinned observed-count distributions. The final category combines counts of at least 9.}
+\label{tab:FreqcopulaCommonN}
+\end{table}

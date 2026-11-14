@@ -1,0 +1,2 @@
+"Coverage_original_min","Coverage_original_median","Coverage_original_max","Conversion_to_dollars","Coverage_limit_dollars_min","Coverage_limit_dollars_median","Coverage_limit_dollars_max","N_policies","N_coverage_below_or_equal_deductible","Limit_interpretation"
+0.000354,11.945908,1410.961385,1e+06,354,11945908,1410961385,4152,4,"Per-occurrence ground-up loss limit (assumed)"
